@@ -2,6 +2,7 @@ package ru.itmentor.spring.boot_security.demo.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itmentor.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
@@ -28,6 +29,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    @Transactional
     public void addUser(User user) {
         entityManager.persist(user);
     }

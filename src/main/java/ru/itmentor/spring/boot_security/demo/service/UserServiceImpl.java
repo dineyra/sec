@@ -1,6 +1,6 @@
 package ru.itmentor.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,19 +27,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
     @Transactional(readOnly = false)
     public User getUserByEmail(String email) {
-
         return userDao.getUserByEmail(email);
     }
 
     @Override
     public void addUser(User user) {
-        userDao.addUser(user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userDao.addUser(user);
     }
 
     @Transactional(readOnly = false)
     public User getUserById(Long id) {
-
         return userDao.getUserById(id);
     }
 
@@ -52,7 +50,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional(readOnly = false)
     public void removeUserById(Long id) {
-
         userDao.removeUserById(id);
     }
 
@@ -68,4 +65,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userDao.getUserByEmail(email);
     }
+
+
 }

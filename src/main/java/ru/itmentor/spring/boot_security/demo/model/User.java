@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,7 +22,7 @@ public class User implements UserDetails {
     @Column(name = "lastname")
     private String lastname;
 
-    @Column(name="age")
+    @Column(name = "age")
     private int age;
 
 
@@ -56,6 +55,7 @@ public class User implements UserDetails {
 
         return id;
     }
+
     public void setId(Long id) {
 
         this.id = id;
@@ -65,6 +65,7 @@ public class User implements UserDetails {
 
         return name;
     }
+
     public void setName(String name) {
 
         this.name = name;
@@ -74,6 +75,7 @@ public class User implements UserDetails {
 
         return lastname;
     }
+
     public void setLastName(String lastName) {
 
         this.lastname = lastName;
@@ -83,10 +85,12 @@ public class User implements UserDetails {
 
         return age;
     }
+
     public void setAge(int age) {
 
         this.age = age;
     }
+
     public String getEmail() {
 
         return email;
@@ -99,7 +103,6 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-
         return password;
     }
 
