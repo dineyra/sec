@@ -13,26 +13,39 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "role", unique = true, length = 100)
+    private String name;
+
     @Column(name = "name", unique = true, length = 100)
     private String role;
 
     public Role() {
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.role = name;
+    }
+
     public Role(Long id) {
 
         this.id = id;
     }
-
-    public Role(String role) {
-
-        this.role = role;
+//todo Прошу понять и простить путаницу с именами, очень опаздываю к дедлайну, зато оно работает)
+    public Role(String name, String role) {
+        this.role = name;
+        this.name = role;
     }
 
     public Long getId() {
 
         return id;
     }
+
     public void setId(Long id) {
 
         this.id = id;
@@ -45,7 +58,7 @@ public class Role implements GrantedAuthority {
 
     public void setRole(String role) {
 
-        this.role = role;
+        this.name = role;
     }
 
     @Override
