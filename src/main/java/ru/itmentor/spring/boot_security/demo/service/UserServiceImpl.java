@@ -5,10 +5,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.itmentor.spring.boot_security.demo.dao.RoleDao;
 import ru.itmentor.spring.boot_security.demo.dao.UserDao;
+import ru.itmentor.spring.boot_security.demo.model.Role;
 import ru.itmentor.spring.boot_security.demo.model.User;
 
 import java.util.List;
@@ -18,13 +19,14 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserDao userDao;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final RoleDao roleDao;
 
     @Lazy
-    public UserServiceImpl(UserDao userDao, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
         this.userDao = userDao;
+        this.roleDao = roleDao;
     }
+
     @Transactional(readOnly = false)
     public User getUserByEmail(String email) {
         return userDao.getUserByEmail(email);
@@ -32,7 +34,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void addUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDao.addUser(user);
     }
 
@@ -58,6 +59,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<User> listUsers() {
 
         return userDao.listUsers();
+    }
+
+    @Override
+    public Role getRoleByName(String name) {
+        return roleDao.getRoleByName(name);
     }
 
     @Override
