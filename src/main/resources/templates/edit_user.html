@@ -36,12 +36,20 @@
                 <input type="password" name="password" th:id="password"><br/>
             </p>
             <p>
-                <label>
-                    <select size="3" multiple="multiple" name="roles" id="roles">
-                        <option selected value="NOT_CHANGED">Roles:</option>
-                        <option value="ROLE_ADMIN">ADMIN</option>
-                        <option value="ROLE_USER">USER</option>
-                    </select>
+<!--                <label>-->
+<!--                    <select size="3" multiple="multiple" name="roles" id="roles">-->
+<!--                        <option selected value="NOT_CHANGED">Roles:</option>-->
+<!--                        <option value="ROLE_ADMIN">ADMIN</option>-->
+<!--                        <option value="ROLE_USER">USER</option>-->
+<!--                    </select>-->
+<!--                </label>-->
+                <label>Roles:
+                    <input type="checkbox" name="roles"
+                           th:each="role : ${roles}"
+                           th:text="${role.name}"
+                           th:value="${role.id}"
+                           th:field="*{roles}"
+                    />
                 </label>
             </p>
         </fieldset>

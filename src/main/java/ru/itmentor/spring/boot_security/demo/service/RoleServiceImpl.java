@@ -16,18 +16,21 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     public RoleServiceImpl(RoleDao roleDao) {
+
         this.roleDao = roleDao;
     }
 
     @Override
     @Transactional(readOnly = false)
     public Set<Role> getAllRoles() {
+
         return roleDao.getAllRoles();
     }
 
     @Override
     @Transactional(readOnly = false)
     public Role getRoleByName(String name) {
+
         return roleDao.getRoleByName(name);
     }
 
@@ -46,12 +49,14 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(readOnly = false)
     public void edit(Role role) {
+
         roleDao.edit(role);
     }
 
     @Override
     @Transactional(readOnly = false)
     public Role getById(Long id) {
+
         return roleDao.getById(id);
     }
 }

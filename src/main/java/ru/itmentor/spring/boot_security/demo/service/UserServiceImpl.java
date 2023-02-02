@@ -7,9 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.itmentor.spring.boot_security.demo.dao.RoleDao;
 import ru.itmentor.spring.boot_security.demo.dao.UserDao;
-import ru.itmentor.spring.boot_security.demo.model.Role;
 import ru.itmentor.spring.boot_security.demo.model.User;
 
 import java.util.List;
@@ -19,16 +17,14 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserDao userDao;
-    private final RoleDao roleDao;
 
     @Lazy
-    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
-        this.roleDao = roleDao;
     }
-
     @Transactional(readOnly = false)
     public User getUserByEmail(String email) {
+
         return userDao.getUserByEmail(email);
     }
 
@@ -39,6 +35,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional(readOnly = false)
     public User getUserById(Long id) {
+
         return userDao.getUserById(id);
     }
 
@@ -51,6 +48,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional(readOnly = false)
     public void removeUserById(Long id) {
+
         userDao.removeUserById(id);
     }
 
@@ -62,15 +60,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Role getRoleByName(String name) {
-        return roleDao.getRoleByName(name);
-    }
-
-    @Override
     @Transactional(readOnly = false)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userDao.getUserByEmail(email);
     }
-
-
 }

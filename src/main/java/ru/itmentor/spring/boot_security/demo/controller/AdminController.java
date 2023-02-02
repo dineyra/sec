@@ -20,6 +20,7 @@ public class AdminController {
     private final RoleService roleService;
     private final String emptyRole = "NOT_CHANGED";
 
+
     @Autowired
     public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
