@@ -48,19 +48,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional(readOnly = false)
     public void removeUserById(Long id) {
-
         userDao.removeUserById(id);
     }
 
     @Override
-    @Transactional(readOnly = false)
     public List<User> listUsers() {
-
         return userDao.listUsers();
     }
 
     @Override
-    @Transactional(readOnly = false)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userDao.getUserByEmail(email);
     }
